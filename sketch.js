@@ -1,9 +1,11 @@
 var a=[];
 var b=[];
-var i=0;
-var j=0;
-
-var noOfnodes=20;
+var i=-1;
+var min=0;
+var j=1;
+var mina=0;
+var minb=0;
+var noOfnodes=7;
 var currentNode=0;
 function setup() {
   createCanvas(1200, 700);
@@ -20,36 +22,47 @@ var i=0;
 }
 
 function draw() {
+
 drawNodes()
-if(i<a.length-1 && j==a.length-1){
-  print(i)
-  j=i
-  j=j+1
-  currentNode=j
-  var min= dist(a[i].x,a[i].y,a[j].x,a[j].y)+1
-drawNodes()
+strokeWeight(4);
+stroke(0,255,0);
+line(a[mina].x,a[mina].y,a[minb].x,a[minb].y)
+ 
+
+if(i<=noOfnodes-1 &&  j==noOfnodes || i==-1) {
   i++
+  j=i+1
+  currentNode=i
+  min=int(dist(a[i].x,a[i].y,a[j].x,a[j].y))*2
+drawNodes()
+
 }
-if(i==a.length-1){
+if(i==noOfnodes-2){
 drawA();}
-if(j!=a.length-1)
-{ 
+else{
+
+strokeWeight(10);
+stroke(255,0,0);
+
 strokeWeight(4);
 stroke(255,0,255);
 line(a[i].x,a[i].y,a[j].x,a[j].y)
-  
-if(min>dist(a[i].x,a[i].y,a[j].x,a[j].y)){
 
-strokeWeight(7);
-stroke(255,0,0);
-line(a[i].x,a[i].y,a[j].x,a[j].y)
+var xyz=int(dist(a[i].x,a[i].y,a[j].x,a[j].y))
+
+if(int(min)>xyz){
+
 min=dist(a[i].x,a[i].y,a[j].x,a[j].y)
+
 temp=a[i+1]
 a[i+1]=a[j]
 a[j]=temp
+mina=i
+minb=i+1
+
+  
 }
   j++
-  
 }
 drawB()
 
@@ -92,6 +105,7 @@ function drawA()
           stroke(255,0,0);
     strokeWeight(5)
   line(a[i].x,a[i].y,a[i+1].x,a[i+1].y)
+
 
   }
 }
