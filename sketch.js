@@ -7,8 +7,11 @@ var mina=0;
 var minb=0;
 var noOfnodes=7;
 var currentNode=0;
+
+
+
 function setup() {
-  createCanvas(1200, 700);
+  createCanvas(1280, 700);
   for(var i=0;i<noOfnodes;i++)
   {
     var v= createVector(random(width),random(height));
@@ -17,14 +20,19 @@ function setup() {
   }
   b=a.slice();  
 var i=0;
+  textSize(100)
+  fill(255)
+  stroke(2)
+  text('Count',100,100)
   frameRate(1);
 
 }
 
 function draw() {
-
 drawNodes()
 strokeWeight(4);
+    fill(255,0,0)
+  text(noOfnodes-i-2,75,100)
 stroke(0,255,0);
 line(a[mina].x,a[mina].y,a[minb].x,a[minb].y)
  
