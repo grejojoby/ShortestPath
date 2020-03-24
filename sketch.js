@@ -5,7 +5,7 @@ var min=0;
 var j=1;
 var mina=0;
 var minb=0;
-var noOfnodes=7;
+var noOfnodes=30;//no of random nodes
 var currentNode=0;
 
 
@@ -24,12 +24,12 @@ var i=0;
   fill(255)
   stroke(2)
   text('Count',100,100)
-  frameRate(1);
+  frameRate(1000);//make it 0.5 if you want to see each operation
 
 }
 
 function draw() {
-drawNodes()
+drawNodes(i+1)//pass 0 if you want all nodes
 strokeWeight(4);
     fill(255,0,0)
   text(noOfnodes-i-2,75,100)
@@ -42,10 +42,11 @@ if(i<=noOfnodes-1 &&  j==noOfnodes || i==-1) {
   j=i+1
   currentNode=i
   min=int(dist(a[i].x,a[i].y,a[j].x,a[j].y))*2
-drawNodes()
+drawNodes(i)//pass 0 if you want all nodes
 
 }
 if(i==noOfnodes-2){
+drawB()
 drawA();}
 else{
 
@@ -72,15 +73,15 @@ minb=i+1
 }
   j++
 }
-drawB()
 
 }
 
 
-function drawNodes()
+function drawNodes(as)
 {
+  // console.log(as)
   background(0);//displays all vertex and curent node
-  for(var i=0;i<a.length;i++)
+  for(var i=as;i<a.length;i++)
   {
         if(i==0)
     {
@@ -114,7 +115,11 @@ function drawA()
     strokeWeight(5)
   line(a[i].x,a[i].y,a[i+1].x,a[i+1].y)
 
-
+if(i==0)
+{
+       fill(0,0,255);//draw vertex a
+    ellipse(a[i].x,a[i].y,20,20)
+}
   }
 }
 
