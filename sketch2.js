@@ -2,12 +2,12 @@ var a=[];
 var b=[];
 var i=-1;
  var w = [];
-
+var tw=[];
 var min=0;
 var j=1;
 var mina=0;
 var minb=0;
-var noOfnodes=4;//no of random nodes
+var noOfnodes=5;//no of random nodes
 var currentNode=0;
 
 
@@ -19,7 +19,7 @@ function setup() {
 
     var v= createVector(random(width),random(height));
   a[i]=v;
-    
+  tw[i]=0;    
   }
   for(var i=0;i<noOfnodes;i++)
   {
@@ -35,7 +35,7 @@ var i=0;
   fill(255)
   stroke(2)
   text('Count',100,100)
-  frameRate(1);//make it 0.5 if you want to see each operation
+  frameRate(100);//make it 0.5 if you want to see each operation
 
 }
 
@@ -43,7 +43,8 @@ function draw() {
 drawNodes(i+1)//pass 0 if you want all nodes
 strokeWeight(4);
     fill(255,0,0)
-  text(noOfnodes-i-2,75,100)
+    text('Total Weight:'+(getSum(tw)),75,100)
+  text('No of Nodes Left:'+(noOfnodes-i-2),75,150)
 stroke(0,255,0);
 line(a[mina].x,a[mina].y,a[minb].x,a[minb].y)
  
@@ -57,6 +58,7 @@ drawNodes(i)//pass 0 if you want all nodes
 
 }
 if(i==noOfnodes-2){
+tw[i]=(dist(a[i].x,a[i].y,a[j].x,a[j].y))
 drawB()
 drawA();}
 else{
@@ -71,17 +73,15 @@ line(a[i].x,a[i].y,a[j].x,a[j].y)
 var xyz=int(dist(a[i].x,a[i].y,a[j].x,a[j].y))
 
 if(int(min)>xyz){
-
 min=dist(a[i].x,a[i].y,a[j].x,a[j].y)
-
 temp=a[i+1]
 a[i+1]=a[j]
 a[j]=temp
 mina=i
 minb=i+1
-
-  
+tw[i]=min
 }
+console.log(tw)
   j++
 }
 
@@ -121,6 +121,7 @@ drawB()
 
 function drawA()
 {
+  var tw=0
   for(var i=0;i<a.length-1;i++){
           stroke(255,0,0);
     strokeWeight(5)
@@ -131,7 +132,19 @@ if(i==0)
        fill(0,0,255);//draw vertex a
     ellipse(a[i].x,a[i].y,20,20)
 }
-  }
+// for(var j=0;j<a.length;j++)
+// {
+
+//   if(a[i].x==b[j].x && a[i].y==b[j].y)
+//   {
+//     // tw=(w[i][j])
+//     console.log(w[i][j])
+//     break
+//   }
+
+//   }
+}
+
 }
 
 function drawB()
@@ -152,4 +165,13 @@ function drawB()
   }
   
 }
+}
+function getSum( num) {
+    sum=0
+    for(var i=0;i<num.length-1;i++)
+    {
+      sum=sum+num[i]
+    }
+    // console.log(sum)
+    return sum
 }
